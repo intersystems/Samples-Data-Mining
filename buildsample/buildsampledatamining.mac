@@ -1,0 +1,36 @@
+ROUTINE buildsampledatamining
+ //This is buildsampledatamining
+ //Use or operation of this code is subject to acceptance of the license available in the code repository for this code.
+ 
+    write !, "This is the setup routine for the Sample-DataMining sample, which provides a copy of"
+    write !, "the Iris dataset, which is well known in pattern recognition literature."
+    write !, "You can use this data to explore the PMML capability of InterSystems IRIS."
+    write !, "This dataset is also useful for exploring the cluster analysis capability of "
+    write !, "InterSystems IRIS Business Intelligence."
+    write !
+
+	write !, "Please specify the directory that contains the Sample-DataMining sample."
+	write !, "(This is the directory that contains the /buildsample and /cls subdirectories.)", !
+	read stagingroot
+	
+	if $ZSTRIP(stagingroot,"<>W")="" {
+		write !, "Not a valid directory... Quitting."
+		quit
+	}
+	if '##class(%File).Exists(stagingroot) {
+		write !, "Not a valid directory... Quitting."
+		quit
+	}
+	 	
+ 	write !, "Loading and compiling classes..."
+ 	set dir=stagingroot_"/cls/"
+ 	do $system.OBJ.LoadDir(dir,"ck",,1)
+ 	
+ 	write !, "Running the DataMining.IrisDataset::load() method..."
+ 	do ##class(DataMining.IrisDataset).load()
+ 	
+ 	write !, "Now the classes and data are available. For details on the sample,"
+ 	write !, "search the InterSystems IRIS documentation for DataMining."
+
+ 	
+
