@@ -29,6 +29,7 @@ Contents of the DataMining package
 
 These classes all provide detailed descriptions, visible as part of the class reference.
 After you have set up the sample, go to http://localhost:57772/csp/documatic/%25CSP.Documatic.cls
+
 Replace localhost with the name of your InterSystems IRIS server instance, and replace 57772 with the
 superserver port used by that instance.
 
