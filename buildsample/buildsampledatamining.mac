@@ -58,6 +58,7 @@ run(stagingroot, interactive) public {
         write !, "Running the DataMining.IrisDataset::load() method..."
     }
     do ##class(DataMining.IrisDataset).load()
+    return 1
  
 } 
 
