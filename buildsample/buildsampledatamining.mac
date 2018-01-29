@@ -8,7 +8,7 @@ ROUTINE buildsampledatamining
     write !, "InterSystems IRIS Data Platform."
     write !
 
-    write !, "Please specify the directory that contains this sample."
+    write !, "Please specify the full path of the directory that contains this sample."
     write !, "(This is the directory that contains the README.md and LICENSE files.)", !
     read stagingroot
     set OK=$$run(stagingroot,1)
