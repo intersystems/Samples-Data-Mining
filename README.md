@@ -45,6 +45,6 @@ Setup instructions
 
    do $system.OBJ.Load("full-path-to-buildsampledatamining.mac","ck")
 
-   do ^buildsampledata
+   do ^buildsampledatamining
 5. Then answer any prompts.
 
