@@ -30,17 +30,18 @@ Replace `localhost` with the name of your InterSystems IRIS server instance, and
 superserver port used by that instance.
 
 ## Setup instructions
-1. Download the repo to your local disk and uncompress it.
-2. Open the InterSystems IRIS Terminal.
-3. Enter the following command (replacing with the namespace where you want to load the sample):
+1. Clone or [download](http://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=asamples) the repository.
+2. If you have not yet created a namespace in InterSystems IRIS, follow the [detailed instructions](http://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ASAMPLES_createns) to 
+3. Open the InterSystems IRIS Terminal.
+4. Enter the following command (replacing with the namespace where you want to load the sample):
 ```
    ZN "mynamespace"
    ```
-4. Enter the following commands (replacing with the full path of the `buildsample/buildsampledatamining.mac` file):
+5. Enter the following commands (replacing with the full path of the `buildsample/buildsampledatamining.mac` file):
 ```
    do $system.OBJ.Load("full-path-to-buildsampledatamining.mac","ck")
 
    do ^buildsampledatamining
    ```
-5. Then answer any prompts.
+6. Then answer any prompts.
 
