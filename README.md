@@ -14,37 +14,33 @@ If you have a suitable license, you can also use this data with InterSystems IRI
 
 In addition to the data, the sample also includes various analytics model elements based on this data.
 
-************************************************************************************
-Contents of the DataMining package
-************************************************************************************
-* DataMining.IrisDataset is the core class. This class defines the data set. See 
-  http://docs.intersystems.com/irislatest?KEY=APMML. 
-* DataMining.PMML.Iris defines a PMML model based on this data. See 
-  http://docs.intersystems.com/irislatest?KEY=APMML. 
-* DataMining.IrisCube is a cube definition based on the same data. To use this class, 
+## Contents of the DataMining package
+* `DataMining.IrisDataset` is the core class. This class defines the data set. See [this article](http://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=APMML). 
+* `DataMining.PMML.Iris` defines a PMML model based on this data. See [this article](http://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=APMML). 
+* `DataMining.IrisCube` is a cube definition based on the same data. To use this class, 
   you must have a license that includes analytics capabilities. 
-* The classes in DataMining.ClusterAnalysis provide a demo and test for the Cluster Analysis 
+* The classes in `DataMining.ClusterAnalysis` provide a demo and test for the Cluster Analysis 
   algorithms included as part of the InterSystems IRIS analytics capabilities. To use this class, 
   you must have a license that includes analytics capabilities. 
 
 These classes all provide detailed descriptions, visible as part of the class reference.
 After you have set up the sample, go to http://localhost:57772/csp/documatic/%25CSP.Documatic.cls
 
-Replace localhost with the name of your InterSystems IRIS server instance, and replace 57772 with the
+Replace `localhost` with the name of your InterSystems IRIS server instance, and replace 57772 with the
 superserver port used by that instance.
 
-************************************************************************************
-Setup instructions
-************************************************************************************
+## Setup instructions
 1. Download the repo to your local disk and uncompress it.
 2. Open the InterSystems IRIS Terminal.
 3. Enter the following command (replacing with the namespace where you want to load the sample):
-
+```
    ZN "mynamespace"
-4. Enter the following commands (replacing with the full path of the buildsample/buildsampledatamining.mac file):
-
+   ```
+4. Enter the following commands (replacing with the full path of the `buildsample/buildsampledatamining.mac` file):
+```
    do $system.OBJ.Load("full-path-to-buildsampledatamining.mac","ck")
 
    do ^buildsampledatamining
+   ```
 5. Then answer any prompts.
 
