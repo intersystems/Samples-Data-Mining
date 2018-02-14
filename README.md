@@ -43,7 +43,7 @@ Setup instructions
    ZN "mynamespace"
 4. Enter the following commands (replacing with the full path of the buildsample/buildsampledatamining.mac file):
 
-   do $system.OBJ.Load("full-path-to-buildsampledataminng.mac","ck")
+   do $system.OBJ.Load("full-path-to-buildsampledatamining.mac","ck")
 
    do ^buildsampledata
 5. Then answer any prompts.
