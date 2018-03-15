@@ -37,11 +37,11 @@ superserver port used by that instance.
 ```
    ZN "mynamespace"
    ```
-5. Enter the following commands (replacing with the full path of the `buildsample/buildsampledatamining.mac` file):
+5. Enter the following commands (replacing with the full path of the `buildsample/Build.DataMiningSample.cls` file):
 ```
-   do $system.OBJ.Load("full-path-to-buildsampledatamining.mac","ck")
+   do $system.OBJ.Load("full-path-to-Build.DataMiningSample.cls","ck")
 
-   do ^buildsampledatamining
+   do ##class(Build.DataMiningSample).Build()
    ```
-6. Then answer any prompts.
+6. When prompted, enter the full path of the directory to which you downloaded this sample. The method then loads and compiles the code and performs other needed setup steps.
 
