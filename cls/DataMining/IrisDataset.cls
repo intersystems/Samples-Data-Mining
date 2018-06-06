@@ -262,7 +262,7 @@ Storage Default
 <IdLocation>^DataMining.IrisDatasetD</IdLocation>
 <IndexLocation>^DataMining.IrisDatasetI</IndexLocation>
 <StreamLocation>^DataMining.IrisDatasetS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
+<Type>%Storage.Persistent</Type>
 }
 
 }
