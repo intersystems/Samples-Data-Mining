@@ -24,10 +24,10 @@ In addition to the data, the sample also includes various analytics model elemen
   you must have a license that includes analytics capabilities. 
 
 These classes all provide detailed descriptions, visible as part of the class reference.
-After you have set up the sample, go to http://localhost:57772/csp/documatic/%25CSP.Documatic.cls
+After you have set up the sample, go to http://localhost:52773/csp/documatic/%25CSP.Documatic.cls
 
-Replace `localhost` with the name of your InterSystems IRIS server instance, and replace 57772 with the
-superserver port used by that instance.
+Replace `localhost` with the name of your InterSystems IRIS server instance, and replace 52773 with the
+web server port used by that instance.
 
 ## Setup instructions
 1. Clone or [download](http://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=asamples) the repository.
