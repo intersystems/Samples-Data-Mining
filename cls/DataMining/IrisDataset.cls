@@ -1,20 +1,14 @@
 /// Use or operation of this code is subject to acceptance of the license available in the code repository for this code.
 /// This class represents the Iris dataset, perhaps the best known database to be found in the pattern recognition literature.
-/// <p>
 /// The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other. Each record has 5 attributes:
-/// <ol>
-/// <li> sepal length in cm
-/// <li> sepal width in cm
-/// <li> petal length in cm
-/// <li> petal width in cm
-/// <li> class (species):
-/// <ul>
-/// <li>Iris Setosa
-/// <li>Iris Versicolour
-/// <li>Iris Virginica
-/// </ul>
-/// </ol>
-/// <p>
+///  sepal length in cm
+///  sepal width in cm
+///  petal length in cm
+///  petal width in cm
+///  class (species):
+/// 	Iris Setosa
+/// 	Iris Versicolour
+/// 	Iris Virginica
 /// The dataset is taken from <a href="http://archive.ics.uci.edu/ml/datasets/Iris">UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science by Frank, A. & Asuncion, A. (2010).</a>
 Class DataMining.IrisDataset Extends %Persistent
 {
@@ -37,21 +31,21 @@ ClassMethod load() As %Status
 	#dim line As %String
 	#dim len, count As %Integer
 
-	Try {
-		Set input=##class(%Dictionary.CompiledXData).%OpenId("DataMining.IrisDataset||Iris").Data
-		If '$IsObject(input) Set sc=%objlasterror Quit
+	try {
+		set input=##class(%Dictionary.CompiledXData).%OpenId("DataMining.IrisDataset||Iris").Data
+		if '$IsObject(input) set sc=%objlasterror quit
 
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 
-		Set count = 0
-		While ($$$ISOK(sc)) {
+		set count = 0
+		while ($$$ISOK(sc)) {
 			set len = 32000
 			set line = input.ReadLine(.len,.sc)
-			Quit:len<1
-			Quit:$$$ISERR(sc)
+			quit:len<1
+			quit:$$$ISERR(sc)
 			
-			Continue:line["<"
-			Continue:line[">"
+			continue:line["<"
+			continue:line[">"
 		
 			set count = $i(count)
 			
@@ -63,10 +57,10 @@ ClassMethod load() As %Status
 			set flower.Species     = $p(line,",",5)
 			
 			set sc = flower.%Save()
-			Quit:$$$ISERR(sc)
+			quit:$$$ISERR(sc)
 		}
 		
-	} Catch (ex) {
+	} catch (ex) {
 		set sc = ex.AsStatus()
 	}
 
@@ -74,7 +68,7 @@ ClassMethod load() As %Status
 		do $system.OBJ.DisplayError(sc)
 	}
 
-	Quit sc
+	quit sc
 }
 
 XData Iris
@@ -234,36 +228,5 @@ XData Iris
 ]]>
 </data>
 }
-
-Storage Default
-{
-<Data name="IrisDatasetDefaultData">
-<Value name="1">
-<Value>%%CLASSNAME</Value>
-</Value>
-<Value name="2">
-<Value>SepalLength</Value>
-</Value>
-<Value name="3">
-<Value>SepalWidth</Value>
-</Value>
-<Value name="4">
-<Value>PetalLength</Value>
-</Value>
-<Value name="5">
-<Value>PetalWidth</Value>
-</Value>
-<Value name="6">
-<Value>Species</Value>
-</Value>
-</Data>
-<DataLocation>^DataMining.IrisDatasetD</DataLocation>
-<DefaultData>IrisDatasetDefaultData</DefaultData>
-<IdLocation>^DataMining.IrisDatasetD</IdLocation>
-<IndexLocation>^DataMining.IrisDatasetI</IndexLocation>
-<StreamLocation>^DataMining.IrisDatasetS</StreamLocation>
-<Type>%Storage.Persistent</Type>
-}
-
 }
 
