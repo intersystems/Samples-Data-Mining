@@ -1,5 +1,4 @@
 /// Use or operation of this code is subject to acceptance of the license available in the code repository for this code.
-/// 
 Class DataMining.IrisCube Extends %DeepSee.CubeDefinition [ DependsOn = DataMining.IrisDataset, ProcedureBlock ]
 {
 
@@ -34,28 +33,28 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
 
 ClassMethod GetPredictedSpecies(pID As %String) As %String
 {
-	// execute the Decision Tree model to predict the species of the IrisDataset instance for pID
+	// Execute the Decision Tree model to predict the species of the IrisDataset instance for pID
 	set tSC = $$$OK, tOutcome = ""
 	try {
-		// 1: fetch the IrisDataset instance
+		// 1: Fetch the IrisDataset instance
 		set tIris = ##class(DataMining.IrisDataset).%OpenId(pID)
 		if (tIris="") {
 			set tSC = $$$ERROR($$$GeneralError, "Could not open IrisDataset object with ID '"_pID_"'")
 			quit
 		}
 		
-		// 2: load its properties into an array
+		// 2: Load its properties into an array
 		kill tData
 		set tData("PetalLength") = tIris.PetalLength
 		set tData("PetalWidth") = tIris.PetalWidth
 		set tData("SepalLength") = tIris.SepalLength
 		set tData("SepalWidth") = tIris.SepalWidth
 		
-		// 3: instantiate the Decision Tree model
+		// 3: Instantiate the Decision Tree model
 		set tSC = ##class(DataMining.PMML.Iris).%GetModelInstance("DecisionTree", .tModel)
 		quit:$$$ISERR(tSC)
 		
-		// 4: execute the model and retrieve the predicted species
+		// 4: Execute the model and retrieve the predicted species
 		set tSC = tModel.%ExecuteModel(.tData, .tOutput)
 		quit:$$$ISERR(tSC)
 		set tOutcome = tOutput.%GetFeatureValue("predictedValue")
@@ -67,7 +66,7 @@ ClassMethod GetPredictedSpecies(pID As %String) As %String
 	quit tOutcome
 }
 
-/// Ensure <class>DataMiningIrisDataset</class> contains data
+/// Ensure DataMiningIrisDataset contains data
 ClassMethod %OnBuildCube() As %Status
 {
 	set tSC = ##class(DataMining.IrisDataset).%DeleteExtent()

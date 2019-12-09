@@ -1,11 +1,9 @@
 /// Use or operation of this code is subject to acceptance of the license available in the code repository for this code.
 /// This is a simple demo and test for Cluster Analysis algorithms included with DeepSee.
-/// <p>
 /// The 2-dimensional dataset consists of 9 points clearly distributed between two clusters.
-/// <p>
-/// Run <code>##class(DataMining.ClusterAnalysis.SimpleTest).test()</code> 
-/// or see also <a href="/csp/samples/DataMining.ClusterAnalysis.ZenDemoPage.cls" target="CADemo">Graphical Zen Demo</a> implemented in class 
-/// <CLASS>DataMining.ClusterAnalysis.ZenDemoPage</CLASS> 
+/// Run ##class(DataMining.ClusterAnalysis.SimpleTest).test()
+/// or see also Graphical Zen Demo implemented in class 
+/// DataMining.ClusterAnalysis.ZenDemoPage
 Class DataMining.ClusterAnalysis.SimpleTest Extends %Persistent
 {
 
@@ -124,27 +122,6 @@ ClassMethod test(verbose As %Integer = 1, NClusters As %Integer = 2)
 	}
 	
 	do:$$$ISERR(sc) $system.OBJ.DisplayError(sc)
-}
-
-Storage Default
-{
-<Data name="SimpleTestDefaultData">
-<Value name="1">
-<Value>%%CLASSNAME</Value>
-</Value>
-<Value name="2">
-<Value>X</Value>
-</Value>
-<Value name="3">
-<Value>Y</Value>
-</Value>
-</Data>
-<DataLocation>^DataMining.Clus7500.SimpleTestD</DataLocation>
-<DefaultData>SimpleTestDefaultData</DefaultData>
-<IdLocation>^DataMining.Clus7500.SimpleTestD</IdLocation>
-<IndexLocation>^DataMining.Clus7500.SimpleTestI</IndexLocation>
-<StreamLocation>^DataMining.Clus7500.SimpleTestS</StreamLocation>
-<Type>%Library.CacheStorage</Type>
 }
 
 }

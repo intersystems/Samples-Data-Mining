@@ -2,47 +2,43 @@ Include %occInclude
 
 /// Use or operation of this code is subject to acceptance of the license available in the code repository for this code.
 /// The test and demo for application of Cluster Analysis to Iris dataset contained in class  
-/// <CLASS>DataMining.IrisDataset</CLASS>
-/// <p>
+/// DataMining.IrisDataset
 /// Run method <code>##class(DataMining.ClusterAnalysis.Iris).test()</code>
-/// <p>
 /// See also <a href="/csp/samples/DataMining.ClusterAnalysis.ZenDemoPage.cls" target="CADemo">Graphical Zen Demo</a> implemented in class 
-/// <CLASS>DataMining.ClusterAnalysis.ZenDemoPage</CLASS> 
+/// DataMining.ClusterAnalysis.ZenDemoPage 
 Class DataMining.ClusterAnalysis.Iris [ Abstract ]
 {
 
 /// This method runs the full Cluster Analysis procedure for Iris dataset.
 /// Parameters:
-/// <ul>
-/// <li> verbose - Level of verbosity. Defualt is 2 that prints the information readable on a single screen. 
+///  - verbose - Level of verbosity. Defualt is 2 that prints the information readable on a single screen. 
 /// Increasing verbosity might yield to too much information being printed but provides more details. 
 /// Verbosity 1 prints just the results but no processing information. Set to 0
 /// for silent run.
-/// <li> NClusters - Number of clusters. The default is 3 and corresponds to the number of actual species in the 
+///  - NClusters - Number of clusters. The default is 3 and corresponds to the number of actual species in the 
 /// dataset.
-/// <li> method - Algorithm to use. Default is 1 which will run "PAM with SA" implemented by class 
-/// <CLASS>%DeepSee.extensions.clusters.PAMSA</CLASS>. Setting to 0 will run simple and pure PAM algorithm 
-/// implemented in <CLASS>%DeepSee.extensions.clusters.PAM</CLASS> which is faster but produces less 
-/// reliable results. Setting it to 2 will run CLARA implemented by <CLASS>%DeepSee.extensions.clusters.CLARA</CLASS>
+///  - method - Algorithm to use. Default is 1 which will run "PAM with SA" implemented by class 
+/// %DeepSee.extensions.clusters.PAMSA. Setting to 0 will run simple and pure PAM algorithm 
+/// implemented in %DeepSee.extensions.clusters.PAM which is faster but produces less 
+/// reliable results. Setting it to 2 will run CLARA implemented by %DeepSee.extensions.clusters.CLARA
 /// which is certainly an overkill for a small dataset like Iris.
-/// </ul>
 ClassMethod test(verbose As %Integer = 2, NClusters As %Integer = 3, method As %Integer = 1)
 {
 	#dim sc 	As %Status = $$$OK
 	#dim ex As %Exception.AbstractException
 	#dim pam As %DeepSee.extensions.clusters.PAM
 	
-	Try{
+	try{
 		set pam = ..GetModel($s(method=2:"clara",method:"sa",1:"pam"), .sc)
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 		
 		set pam.K = NClusters
 		set pam.Verbose = verbose - 1
 		
 		set sc = pam.Execute()
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 		
-		Quit:'verbose
+		quit:'verbose
 		
 		if (verbose > 2) {
 			do pam.printAll()
@@ -63,7 +59,7 @@ ClassMethod test(verbose As %Integer = 2, NClusters As %Integer = 3, method As %
 		set sc = tPMML.%SaveToClass(tModelClassName, 1, verbose)
 		quit:$$$ISERR(sc)
 		
-		// run PMML model against the whole dataset
+		// Run PMML model against the whole dataset
 		if (verbose) {
 			set tClusterID = ""
 			for i = 1:1:3 {
@@ -81,7 +77,7 @@ ClassMethod test(verbose As %Integer = 2, NClusters As %Integer = 3, method As %
 			quit:$$$ISERR(sc)
 		}
 		
-	}Catch(ex){
+	}catch(ex){
 		set sc = ex.AsStatus()
 	}
 	do:$$$ISERR(sc) $system.OBJ.DisplayError(sc)
@@ -97,9 +93,9 @@ ClassMethod speciesMatrix(model As %DeepSee.extensions.clusters.AbstractModel, k
 	
 	set i = ""
 	set mostFrequent = ""
-	Do {
+	do {
 		do model.iterateCluster(k, .i, .id, .x)
-		Quit:i=""
+		quit:i=""
 		
 		set flower = ##class(DataMining.IrisDataset).%OpenId(id)
 		set species = flower.Species
@@ -112,7 +108,7 @@ ClassMethod speciesMatrix(model As %DeepSee.extensions.clusters.AbstractModel, k
 	} While(i'="")
 	
 	
-	Quit sc
+	quit sc
 }
 
 ClassMethod Summary(model As %DeepSee.extensions.clusters.AbstractModel, Output pClusterNames) As %Status
@@ -127,7 +123,7 @@ ClassMethod Summary(model As %DeepSee.extensions.clusters.AbstractModel, Output 
 	
 	k pClusterNames
 	set sc = ..GetResults(model, .correct, .error, .s1, .s2, .s3)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 	
 	set pClusterNames(1) = s1
 	set pClusterNames(2) = s2
@@ -141,11 +137,11 @@ ClassMethod Summary(model As %DeepSee.extensions.clusters.AbstractModel, Output 
 	
 	w "Indices:", !
 	set asw = model.GetASWIndex().calculate(.sc)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 	set r =  model.GetPearsonGammaIndex().calculate(.sc)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 	set ch =  model.GetCalinskiHarabaszIndex().calculate(.sc)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 	set cost = model.TotalCost()
 	
 	w "Total Final Cost = 				"_cost, !
@@ -153,7 +149,7 @@ ClassMethod Summary(model As %DeepSee.extensions.clusters.AbstractModel, Output 
 	w "Pearson-Gamma (PG) = 			"_r, !
 	w "Calinski-Harabasz (CH) = 		"_ch, !
 	
-	Quit sc
+	quit sc
 }
 
 ClassMethod GetResults(model As %DeepSee.extensions.clusters.AbstractModel, Output correct As %Integer, Output error As %Integer, Output s1 As %String, Output s2 As %String, Output s3 As %String)
@@ -162,20 +158,20 @@ ClassMethod GetResults(model As %DeepSee.extensions.clusters.AbstractModel, Outp
 	#dim matrix
 
 	set sc = ..speciesMatrix(model, 1, .matrix, .s1)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 
 	set sc = ..speciesMatrix(model, 2, .matrix, .s2)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 
 	set sc = ..speciesMatrix(model, 3, .matrix, .s3)
-	Quit:$$$ISERR(sc) sc
+	quit:$$$ISERR(sc) sc
 		
 	set correct =       $g(matrix(1,s1)) + $g(matrix(2,s2)) + $g(matrix(3,s3))
 	set error   = 		$g(matrix(1,s2),0) + $g(matrix(1,s3),0)
 	set error = error + $g(matrix(2,s1),0) + $g(matrix(2,s3),0)
 	set error = error + $g(matrix(3,s1),0) + $g(matrix(3,s2),0)
 
-	Quit sc
+	quit sc
 }
 
 ClassMethod GetModel(method As %String, Output sc As %Status) As %DeepSee.extensions.clusters.AbstractModel
@@ -187,7 +183,7 @@ ClassMethod GetModel(method As %String, Output sc As %Status) As %DeepSee.extens
 	
 	if ('##class(%DeepSee.extensions.clusters.AbstractModel).Exists(dataset)){
 		set sc = ..PrepareModel(dataset)
-		Quit:$$$ISERR(sc) ""
+		quit:$$$ISERR(sc) ""
 	}
 	
 	if (method="sa") {
@@ -203,7 +199,7 @@ ClassMethod GetModel(method As %String, Output sc As %Status) As %DeepSee.extens
 	
 	set pam.Normalize = 0
 	
-	Quit pam
+	quit pam
 }
 
 ClassMethod checkData() As %Status
@@ -211,19 +207,19 @@ ClassMethod checkData() As %Status
 	#dim sc 	As %Status = $$$OK
 	#dim ex As %Exception.AbstractException
 	
-	Try{
+	try{
 		&sql(select count(%ID) into :count from DataMining.IrisDataset)
 		if (count'=150) {
 			set sc = ##class(DataMining.IrisDataset).%KillExtent()
-			Quit:$$$ISERR(sc)
+			quit:$$$ISERR(sc)
 			set sc = ##class(DataMining.IrisDataset).load()
-			Quit:$$$ISERR(sc)
+			quit:$$$ISERR(sc)
 		}
-	}Catch(ex){
+	}catch(ex){
 		set sc = ex.AsStatus()
 	}
 	
-	Quit sc
+	quit sc
 }
 
 ClassMethod PrepareModel(dataset As %String) As %Status
@@ -232,35 +228,35 @@ ClassMethod PrepareModel(dataset As %String) As %Status
 	#dim ex As %Exception.AbstractException
 	#dim pam As %DeepSee.extensions.clusters.PAM
 	
-	Try{
+	try{
 		set sc = ..checkData()
 		
 		set pam = ##class(%DeepSee.extensions.clusters.PAM).New(dataset,.sc)
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 		set pam.Normalize = 0
 
 		set rs = ##class(%ResultSet).%New("%DynamicQuery:SQL")
 		set sc = rs.Prepare("select %ID, SepalLength, SepalWidth, PetalLength, PetalWidth from DataMining.IrisDataset")
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 		set sc = rs.Execute()
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 
 		set sc = pam.SetData(rs, 4)
-		Quit:$$$ISERR(sc)
+		quit:$$$ISERR(sc)
 		
 		set sc = pam.Prepare()		
-		Quit:$$$ISERR(sc)
-	}Catch(ex){
+		quit:$$$ISERR(sc)
+	}catch(ex){
 		set sc = ex.AsStatus()
 	}
 	
 	do:$$$ISERR(sc) $system.OBJ.DisplayError(sc)
-	Quit sc
+	quit sc
 }
 
 ClassMethod DeleteModel() As %Status
 {
-	Quit ##class(%DeepSee.extensions.clusters.AbstractModel).Delete("iris")
+	quit ##class(%DeepSee.extensions.clusters.AbstractModel).Delete("iris")
 }
 
 }
